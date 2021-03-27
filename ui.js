@@ -1,10 +1,10 @@
-class UI{
-    constructor(){
+class UI {
+    constructor() {
         this.profileContainer = document.querySelector("#profileContainer");
         this.alert = document.querySelector("#alert");
     }
 
-    showProfile(profile){
+    showProfile(profile) {
         this.profileContainer.innerHTML = `
         
             <div class="card card-body">
@@ -42,20 +42,53 @@ class UI{
                             Company : ${profile.company.name}
                         </li>
                     </ul>
-                </div>
-            
+                    <h4 class="mt-4">Todo List</h4>
+                    <ul id="todo" class="list-group">
+
+                    </ul>
+                </div>    
             </div>
+        </div>
+
 
         
         `;
     }
 
-    showAlert(text){
+    showAlert(text) {
         this.alert.innerHTML = `${text} is not found!`;
     }
 
-    clear(){
-        this.profileContainer.innerHTML ="";
-        this.alert.innerHTML ="";
+    showToDo(toDo) {
+
+        let html ="";
+
+        toDo.forEach(item => {
+            
+            if(item.completed){
+                html += `
+                    <li class="list-group-item bg-success">
+                        ${item.title}
+                    </li>
+
+                `;
+            }else {
+                html += `
+                    <li class="list-group-item bg-secondary">
+                        ${item.title}
+                    </li>
+
+                `;
+            }
+        });
+
+
+        this.profileContainer.querySelector("#todo").innerHTML = html;
+
+    }
+
+    clear() {
+        this.profileContainer.innerHTML = "";
+        this.alert.innerHTML = "";
     }
 }
